@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{style2017}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks =false,
+    linkcolor=blue,
+   linkbordercolor = 1 0 0
+}
+\newcounter{numexo}
+\setcellgapes{1pt}
+
+\begin{document}
+
+
+\begin{NSI}
+{Activité}{Architecture Von Neumann - Langage machine}
+\end{NSI}
+
+
+\section{Architecture von Neumann}
+
+Les appareils numériques comme les ordinateurs, tablettes ou smartphones sont construits selon un modèle d'architecture créé par Von Neumann. Celle-ci se décompose en trois parties:
+\begin{itemize}
+\item La mémoire centrale
+\item Le microprocesseur
+\item Les bus de communication pour transporter les informations.
+\end{itemize}
+
+Vous allez étudier cette architecture en vous basant sur 2 articles du site \textbf{https://interstices.info}
+\begin{enumerate}
+\item Le modèle d'architecture de Von Neumann
+\item Mémoire et unité centrale, un couple dédié à l'exécution des programmes
+\end{enumerate}
+
+
+\subsection*{Schéma de l'architecture}
+
+Dessiner le schéma du modèle originel de Von Neumann pour l'architecture des ordinateurs. \vspace{8cm}
+
+\subsection*{La mémoire centrale}
+
+\begin{enumerate}
+\item Quel est le type d'information stocké dans la mémoire ? \vspace{2cm}
+\item Quel est la capacité en octet/bits de cette cellule ?\vspace{2cm}
+\item Comment est identifiée la cellule ? \vspace{2cm}
+
+\item Quelle est la persistance de la mémoire ?  Comment est-elle désignée ?\vspace{2cm}
+
+\item Comment se caractérise la mémoire ? \vspace{3cm}
+\end{enumerate}
+
+
+\subsection*{Le processeur}
+
+\begin{enumerate}
+\item Comment peut-on qualifier le rôle du processeur ?\vspace{2cm}
+\item Quels sont les 4 éléments principaux composant un processeur ? Quels sont leurs rôles ?\vspace{10cm}
+\end{enumerate}
+
+
+
+
+
+\newpage
+\section{Langage machine}
+
+
+\begin{enumerate}
+\item Qu'est-ce que le langage machine ? \vspace{3cm}
+\item Qu'est-ce que le langage assembleur ? \vspace{3cm}
+\item Comment un programme écrit en langage de haut niveau est-il transformer en langage machine ?\vspace{3cm}
+
+\item Il existe sur le web un simulateur pour réaliser des instructions en langage machine à l'adresse : \\
+\textsf{https://www.peterhigginson.co.uk/AQA/}\medskip
+
+Vous trouverez des informations sur l'utilisation de cet émulateur sur le site \\
+\textsf{https://pixees.fr/informatiquelycee/n\_site/nsi\_prem\_sim\_cpu.html}\medskip
+
+Indiquer ce que font les différentes instructions écrites en assembleur.\medskip
+\begin{enumerate}
+
+\item ADD R0, R1, \#25 \vspace{1.5cm}
+\item LDR R2,64 \vspace{1.5cm}
+\item MOV R3, \#45 \vspace{1.5cm}
+\item STR R4, 72 \vspace{1.5cm}
+\item SUB R5,R2,R3 \vspace{1.5cm}
+\item CMP R3, \#25 \\
+\hspace{0.5cm}BGT 15 \vspace{1.5cm}
+\end{enumerate}
+
+\item Écrire les instructions en assembleur correspondant aux phrases suivantes:
+\begin{itemize}
+\item Place la valeur 15 dans le registre R0 \vspace{1cm}
+\item Place la valeur 7 dans le registre R1 \vspace{1cm}
+\item Additionne la valeur stockée dans le registre R0 et la valeur stockée dans le registre R1, le résultat est stocké dans le registre R5 \vspace{1cm}
+\item Place le contenu du registre R5 à l'adresse mémoire 125. \vspace{1cm}
+\item Place la valeur 10 dans le registre R1 \vspace{1cm}
+\item Place la valeur stockée à l'adresse mémoire 125 dans le registre R0 \vspace{1cm}
+\item Soustrait la valeur stockée dans le registre R0 et la valeur stockée dans le registre R1, le résultat est stocké dans le registre R5 \vspace{1cm}
+\item Place le contenu du registre R5 à l'adresse mémoire 125. \vspace{1cm}
+\end{itemize}
+\item Quelles sont les valeurs dans les différents registres à l'issu de ce programme ? \vspace{2cm}
+\item Saisir votre programme dans le simulateur et vérifier vos réponses.
+\end{enumerate}
+
+
+
+\end{document}
+

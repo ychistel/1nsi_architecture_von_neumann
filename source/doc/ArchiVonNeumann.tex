@@ -1,0 +1,127 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+%\usetheme{Bergen}
+\usecolortheme{beaver}
+ 
+%Information to be included in the title page:
+\title{Architecture de Von Neumann}
+\author{Yannick CHISTEL}
+\institute{Lycée Dumont d'Urville - CAEN}
+\date{Septembre 2019}
+ 
+
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+ 
+\begin{frame}
+\frametitle{Architecture d’un ordinateur}
+Un ordinateur est composé de plusieurs unités fonctionnelles:
+\begin{itemize}
+\item La mémoire centrale
+\item L’unité centrale ou processeur (CPU)
+\item Les unités d’E/S
+\end{itemize}
+Cet ensemble d’unités constituent le système informatique
+
+\end{frame}
+ 
+\begin{frame}
+\frametitle{Mémoire centrale d’un ordinateur}
+\begin{block}{Définition}
+La mémoire centrale (RAM) contient les programmes à exécuter et les données du programme. 
+
+Elle peut se représenter comme un tableau de cases mémoires appelées \textbf{mots} mémoires.
+\end{block}
+
+\begin{itemize}
+\item La taille des mots mémoire peut varier de 8 à 64 \textit{bits}.
+\item Chaque case ou mot mémoire est repéré par une \textbf{adresse} unique.
+\item L'accès au contenu du mot mémoire est en \textbf{lecture} ou \textbf{écriture}.
+\item La mémoire centrale est volatile. Lorsqu'il n'y a plus de tension, elle est effacée.
+\end{itemize}
+Il existe des mémoires persistantes dites mémoires de masse.
+\end{frame}
+
+\begin{frame}
+\frametitle{Le processeur (CPU)}
+
+\begin{block}{Définition}
+Un processeur se compose en 2 parties:
+\begin{itemize}
+\item L'unité arithmétique et logique : effectue les opérations mathématiques et les opérations logiques.
+\item L’unité de contrôle : joue le rôle d'un chef d'orchestre. Il charge les instructions et les données contenues en mémoire et les envoie à l'UAL pour le traitement.
+\end{itemize}
+
+\end{block}
+
+Un processeur contient ses propres mémoires appelées \textbf{registres}. 
+\begin{itemize}
+\item Certains registres contiennent les données et les instructions du programme en binaire,
+\item D'autres registres contiennent les adresses mémoires des données et des instructions du programme.
+\end{itemize}
+Il existe une mémoire cache qui permet de limiter l'accès à la mémoire centrale.
+\end{frame}
+
+\begin{frame}
+\frametitle{Les unités d'entrée-sortie E/S}
+
+Il existe de nombreux périphériques d'entrée et sortie :
+
+\begin{enumerate}
+\item Les périphériques d'entrée :
+
+\begin{itemize}
+\item Les périphériques de saisies comme le clavier et la souris;
+\item Les manettes de jeu, les lecteurs de code (code barre, qrcode, etc.)
+\item Les scanners, les appreils photos, les webcams, etc.
+\end{itemize}
+
+\item Les périphériques de sortie :
+\begin{itemize}
+\item les écrans et vidéo-projecteurs,
+\item les imprimantes,
+\item les hauts parleurs, etc.
+\end{itemize}
+
+\item Les périphériques d'entrée et sortie:
+\begin{itemize}
+\item les lecteurs de disques (CD, Blue Ray, etc.)
+\item les disques durs, les clés USB ou les cartes SD,
+\item les cartes réseaux, etc.
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Liaisons entre les unités}
+\begin{block}{Définition}
+Les différentes unités fonctionnelles sont reliées entre elles, soit par des circuits intégrés comme la carte mère, soit par des liaisons filaires électriques.
+
+Ces liaisons sont appelées des \textbf{bus}. Il existe trois type de bus:
+\begin{itemize}
+\item Les bus de données qui transportent les données et instructions des programmes,
+\item Les bus d'adressage qui transportent les adresses mémoires utilisées,
+\item Les bus de contrôle pour indiquer s'il s'agit d'une lecture ou d'une écriture en mémoire.
+\end{itemize}
+\end{block}
+
+\begin{block}{Remarque}
+Le processeur contient aussi une \textbf{horloge} qui rythme l'exécution des programme et les échanges entre le processeur et la mémoire.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Schéma de l'architecture de Von Neumann}
+Les ordinateurs suivent cette même architecture créée par le professeur Von Neumann.
+
+\begin{center}
+\includegraphics[scale=0.5]{archi-von-neumann.png}
+\end{center}
+\end{frame}
+\end{document}
+
