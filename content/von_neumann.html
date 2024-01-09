@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Architecture de Von Neumann &#8212; 1 NSI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6621bbe" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/translations.js?v=d99ca74e"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/von_neumann';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Exercices" href="exercice.html" />
+    <link rel="prev" title="Activité" href="activite.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">1 NSI</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activite.html">Activité</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Architecture de Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercice.html">Exercices</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/von_neumann.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Architecture de Von Neumann</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memoire-vive-dun-ordinateur">Mémoire vive d’un ordinateur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-unite-centrale-ou-processeur-cpu">L’unité centrale ou processeur (CPU)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-bus-de-communication">Les bus de communication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-unites-d-entree-sortie-e-s">Les unités d’entrée-sortie E/S</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="toctree-wrapper compound">
+</div>
+<section id="architecture-de-von-neumann">
+<h1>Architecture de Von Neumann<a class="headerlink" href="#architecture-de-von-neumann" title="Link to this heading">#</a></h1>
+<p>L’ordinateur est une machine pensée par le mathématicien et physicien américano-hongrois John Von Neumann.</p>
+<p>Le principe, consiste à insérer un programme informatique dans une mémoire et l’exécuter par l’ordinateur sans intervention humaine. L’architecture de l’ordinateur se compose de :</p>
+<ul class="simple">
+<li><p>La mémoire centrale</p></li>
+<li><p>L’unité centrale ou processeur (CPU)</p></li>
+<li><p>Les bus de communication entre la mémoire et le processeur</p></li>
+<li><p>Les unités d’entrée et sortie que sont les différents périphériques (disque dur, clavier, …)</p></li>
+</ul>
+<p>Le schéma ci-dessous en donne une représentation:</p>
+<img alt="../_images/modele_von_neumann.svg" class="align-center" src="../_images/modele_von_neumann.svg" /><p>Un ordinateur manipule de l’information codée en <strong>binaire</strong>, c’est à dire des <strong>bits</strong> qui valent 0 ou 1. Ces bits sont regroupés par 8 et forment un <strong>octet</strong>. Les capacités d’un ordinateur sont exprimées par des multiples d’octets : kilo-octet (Ko), mega-octet (Mo), giga-octet (Go) et tera-octet (To).</p>
+<section id="memoire-vive-dun-ordinateur">
+<h2>Mémoire vive d’un ordinateur<a class="headerlink" href="#memoire-vive-dun-ordinateur" title="Link to this heading">#</a></h2>
+<p>La mémoire centrale appelée RAM (Random Access Memory) contient les programmes à exécuter et les données des programmes en binaire.</p>
+<p>Elle peut se représenter comme un tableau de cellules mémoires appelées <strong>mots</strong> mémoires.</p>
+<img alt="../_images/cellule_memoire.png" class="align-center" src="../_images/cellule_memoire.png" />
+<ul class="simple">
+<li><p>La taille des cellules ou mots mémoires peut être de 32 ou 64 <strong>bits</strong>.</p></li>
+<li><p>Chaque cellule est repérée par une <strong>adresse mémoire</strong> unique, association d’un identifiant de colonne et d’un identifiant de ligne.</p></li>
+<li><p>L’accès au contenu du mot mémoire est en <strong>lecture</strong> et / ou en <strong>écriture</strong>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>La mémoire centrale est volatile, ce qui signifie que toutes les données sont effacées lorsqu’il n’y a plus de tension électrique.</p></li>
+<li><p>La mémoire centrale ne doit pas être confondue avec d’autres mémoires, comme les mémoires persistantes dites mémoires de masse.</p></li>
+</ol>
+</div>
+</section>
+<section id="l-unite-centrale-ou-processeur-cpu">
+<h2>L’unité centrale ou processeur (CPU)<a class="headerlink" href="#l-unite-centrale-ou-processeur-cpu" title="Link to this heading">#</a></h2>
+<p>Le processeur d’un ordinateur est le cerveau de la machine, constitué de millions de composants électriques rassemblés sur une puce de petite taille.</p>
+<img alt="../_images/CPU.jpg" class="align-center" src="../_images/CPU.jpg" />
+<p>On distingue deux unités dans le processeur : l”<strong>unité arithmétique et logique</strong> et l”<strong>unité de contrôle</strong>.</p>
+<p class="rubric">L’unité arithmétique et logique (UAL)</p>
+<p>L’unité arithmétique et logique (UAL) effectue les opérations mathématiques et les opérations logiques. Il contient un <strong>accumulateur</strong> qui stocke les résultats des calculs.</p>
+<p class="rubric">L’unité de contrôle</p>
+<p>L’unité de contrôle joue le rôle d’un chef d’orchestre. Il charge les instructions du programme et les données contenues en mémoire vive dans des <strong>registres</strong> puis les envoie à l’UAL pour le traitement. Il contient :</p>
+<ul class="simple">
+<li><p>un <strong>registre d’instruction</strong> qui est une petite mémoire interne au processeur dans laquelle sont placées les instructions du programme à exécuter.</p></li>
+<li><p>un <strong>compteur de programme</strong> qui contient l’adresse de la prochaine instruction à exécuter et un nombre entier qui augmente de 1 à chaque nouvelle instruction.</p></li>
+</ul>
+<p class="rubric">L’horloge</p>
+<p>Le processeur contient aussi une <strong>horloge</strong> qui rythme l’exécution des programmes et des échanges entre le processeur et la mémoire. La fréquence du processeur, exprimée en giga hertz (GHz), indique le nombre de <strong>cycles</strong> que le processeur peut réaliser en 1 seconde.  Chaque <strong>cycle d’horloge</strong> se déroule de la façon (simplifiée) suivante:</p>
+<ul class="simple">
+<li><p>l’adresse contenue dans le compteur de programme est envoyée à la mémoire</p></li>
+<li><p>l’instruction contenue dans cette mémoire est envoyée au registre d’instruction du processeur</p></li>
+<li><p>le compteur de programme est incrémenté de 1 et se tient prêt à aller chercher l’instruction suivante pour le prochain cycle</p></li>
+<li><p>l’instruction est analysée et décomposée en code opération (OP) puis envoyée à l’unité arithmétique et logique</p></li>
+<li><p>l’opération est effectuée avec récupération de données en mémoire si besoin</p></li>
+<li><p>le résultat est conservé dans l’accumulateur jusqu’à la prochaine opération</p></li>
+</ul>
+<p>Un cycle recommence avec l’instruction suivante et ainsi de suite.</p>
+</section>
+<section id="les-bus-de-communication">
+<h2>Les bus de communication<a class="headerlink" href="#les-bus-de-communication" title="Link to this heading">#</a></h2>
+<p>Le processeur et la mémoire communiquent par l’intermédiaire de <strong>bus</strong>. On distingue trois types de <strong>bus</strong>:</p>
+<ul class="simple">
+<li><p>le <strong>bus d’adresse</strong> qui permet au processseur d’accéder à l’emplacement de la mémoire.</p></li>
+<li><p>le <strong>bus de données</strong> qui permet au processeur et à la mémoire d’échanger les données.</p></li>
+<li><p>le <strong>bus de contrôle</strong> qui indique l’action à réaliser: lire ou écrire en mémoire.</p></li>
+</ul>
+<p>Dans le processeur même, il y a des bus entre l’unité de contrôle et l’unité arithmétique et logique. La recherche et le développement de processeur tente de réduire au maximum ces bus d’échanges qui augmentent les temps d’exécution d’un programme.</p>
+</section>
+<section id="les-unites-d-entree-sortie-e-s">
+<h2>Les unités d’entrée-sortie E/S<a class="headerlink" href="#les-unites-d-entree-sortie-e-s" title="Link to this heading">#</a></h2>
+<p>La dernière partie de l’architecture de Von Neumann concerne les entrées et sorties appelées périphériques. Il existe de nombreux périphériques d’entrée et de sortie :</p>
+<ol class="arabic simple">
+<li><p>Les périphériques d'<strong>entrée</strong> :</p>
+<ul class="simple">
+<li><p>Les périphériques de saisies comme le clavier et la souris;</p></li>
+<li><p>Les manettes de jeu, les lecteurs de code (code barre, qrcode, etc.)</p></li>
+<li><p>Les scanners, les appreils photos, les webcams, etc.</p></li>
+</ul>
+</li>
+<li><p>Les périphériques de <strong>sortie</strong> :</p>
+<ul class="simple">
+<li><p>les écrans et vidéo-projecteurs,</p></li>
+<li><p>les imprimantes,</p></li>
+<li><p>les hauts parleurs, etc.</p></li>
+</ul>
+</li>
+<li><p>Les périphériques d'<strong>entrée et de sortie</strong>:</p>
+<ul class="simple">
+<li><p>les lecteurs de disques (CD, Blue Ray, etc.)</p></li>
+<li><p>les disques durs, les clés USB ou les cartes SD,</p></li>
+<li><p>les cartes réseaux, wifi, etc.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="activite.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Activité</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercice.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Exercices</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memoire-vive-dun-ordinateur">Mémoire vive d’un ordinateur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-unite-centrale-ou-processeur-cpu">L’unité centrale ou processeur (CPU)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-bus-de-communication">Les bus de communication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-unites-d-entree-sortie-e-s">Les unités d’entrée-sortie E/S</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Yannick Chistel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022, Yannick Chistel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
