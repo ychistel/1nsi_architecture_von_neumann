@@ -1,8 +1,3 @@
-.. 1NSI
-
-.. toctree::
-   :maxdepth: 1
-   
 Exercices
 =========
 

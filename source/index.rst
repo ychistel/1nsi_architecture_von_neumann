@@ -1,5 +1,3 @@
-.. 1NSI
-
 Modèle d’architecture séquentielle (von Neumann)
 ================================================
 
@@ -10,7 +8,7 @@ Modèle d’architecture séquentielle (von Neumann)
    :maxdepth: 1
    :hidden:
    
-   content/activite.rst
    content/von_neumann.rst
    content/exercice.rst
+   content/tp_langage_machine.rst
 
