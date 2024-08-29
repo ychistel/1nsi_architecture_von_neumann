@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('./_extensions'))
 
 project = 'Algorithmes de tri'
 author = 'Yannick Chistel'
-year = '2023'
+year = '2024'
 copyright = year + ',' + author
 
 
@@ -53,6 +53,7 @@ exclude_patterns = ['nb']
 #
 #html_theme = 'alabaster'
 html_theme = 'sphinx_book_theme'
+#html_theme = 'pydata_sphinx_theme'
 html_title = '<a href="https://ychistel.github.io/cours/content/1nsi.html">NSI</a>'
 
 # Add any paths that contain custom static files (such as style sheets) here,
